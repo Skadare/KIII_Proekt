@@ -8,15 +8,16 @@ services:
       - "5173:5173"
     depends_on:
       - backend
-
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"  
+      - "8080:8080"
     depends_on:
       - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI}
 
   mongodb:
     image: mongo:6
@@ -24,6 +25,10 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}
+    command: ["mongod", "--auth", "--bind_ip_all"]
 
 volumes:
   mongo_data:
