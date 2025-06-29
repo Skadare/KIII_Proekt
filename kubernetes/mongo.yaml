@@ -1,3 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-secret
+  namespace: nba-voting
+type: Opaque
+stringData:
+  MONGO_USER: admin
+  MONGO_PASS: admin123
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+  namespace: nba-voting
+data:
+  MONGO_DB: nba
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: nba-voting
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
