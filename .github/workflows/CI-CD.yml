@@ -62,5 +62,5 @@ jobs:
 
       - name: Verify rollout
         run: |
-          kubectl rollout status deployment/nba-backend -n nba-voting --timeout=90s
-          kubectl rollout status deployment/nba-frontend -n nba-voting --timeout=90s
+          kubectl rollout status deployment/backend -n nba-voting --timeout=90s
+          kubectl rollout status deployment/frontend -n nba-voting --timeout=90s
