@@ -16,7 +16,7 @@ metadata:
   name: frontend
   namespace: nba-voting
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
